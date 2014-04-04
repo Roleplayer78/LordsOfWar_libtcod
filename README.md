@@ -16,12 +16,15 @@ breathing world.
 Some of the main points of the game:
 * A complete Europe map, rendered in ascii of course, with different kingdoms
 * A free, open world, to explore
-* Capitol and major cities created while villages and hamlet procedurally created but then saved
+* Capitols and major cities created while villages and hamlet procedurally created but then saved
 * A involved character generation and advancement, based on real-world skills and capabilities
 * Realistic combat that made out with HP and tracks wounds individually
 * Tactical choices like attacks, defences, counter-attacks all based on medieval treaties
 * Saints, religions and alchemy directly taken by history, but with a twist
-* World-based objects
+* World-based objects, with desctructable buildings blocks
+* Day/Night cycle and wether that will affect gameplay
+* Portraits while engaged in conversations
+* Multi-character party
 * A complex and involved storyline spanning Europe
 * Who knows....
 
