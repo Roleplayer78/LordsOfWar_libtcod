@@ -1,33 +1,49 @@
 #include <math.h>
 #include "main.hpp"
 
-Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP),fovRadius(10),
-	screenWidth(screenWidth),screenHeight(screenHeight) {
+Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP),
+	player(NULL),map(NULL),fovRadius(10),
+	screenWidth(screenWidth),screenHeight(screenHeight),level(1) {
     TCODConsole::initRoot(screenWidth,screenHeight,"libtcod C++ tutorial",false);
+    gui = new Gui();
+}
+
+void Engine::init() {
     player = new Actor(40,25,'@',"player",TCODColor::white);
     player->destructible=new PlayerDestructible(30,2,"your cadaver");
     player->attacker=new Attacker(5);
     player->ai = new PlayerAi();
     player->container = new Container(26);
     actors.push(player);
+    stairs = new Actor(0,0,'>',"stairs",TCODColor::white);
+    stairs->blocks=false;
+    stairs->fovOnly=false;
+    actors.push(stairs);
     map = new Map(80,43);
-    gui = new Gui();
+    map->init(true);
     gui->message(TCODColor::red, 
     	"Welcome stranger!\nPrepare to perish in the Tombs of the Ancient Kings.");
+    gameStatus=STARTUP;
 }
 
 Engine::~Engine() {
-    actors.clearAndDelete();
-    delete map;
+	term();
     delete gui;
+}
+
+void Engine::term() {
+    actors.clearAndDelete();
+    if ( map ) delete map;
+    gui->clear();
 }
 
 void Engine::update() {
 	if ( gameStatus == STARTUP ) map->computeFov();
    	gameStatus=IDLE;
     TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS|TCOD_EVENT_MOUSE,&lastKey,&mouse);
-    if ( lastKey.vk == TCODK_ENTER && lastKey.lalt ) {
-    	TCODConsole::setFullscreen(!TCODConsole::isFullscreen());
+    if ( lastKey.vk == TCODK_ESCAPE ) {
+    	save();
+    	load(true);
     }
     player->update();
     if ( gameStatus == NEW_TURN ) {
@@ -49,7 +65,9 @@ void Engine::render() {
 	for (Actor **iterator=actors.begin();
 	    iterator != actors.end(); iterator++) {
 		Actor *actor=*iterator;
-		if ( actor != player && map->isInFov(actor->x,actor->y) ) {
+		if ( actor != player 
+			&& ((!actor->fovOnly && map->isExplored(actor->x,actor->y))
+				|| map->isInFov(actor->x,actor->y)) ) {
 	        actor->render();
 	    }
 	}
@@ -123,4 +141,23 @@ bool Engine::pickATile(int *x, int *y, float maxRange) {
 		TCODConsole::flush();
 	}
 	return false;
+}
+
+void Engine::nextLevel() {
+	level++;
+	gui->message(TCODColor::lightViolet,"You take a moment to rest, and recover your strength.");
+	player->destructible->heal(player->destructible->maxHp/2);
+	gui->message(TCODColor::red,"After a rare moment of peace, you descend\ndeeper into the heart of the dungeon...");
+    delete map;
+    // delete all actors but player and stairs
+    for (Actor **it=actors.begin(); it!=actors.end(); it++) {
+    	if ( *it != player && *it != stairs ) {
+    		delete *it;
+    		it = actors.remove(it);
+    	}
+    }
+    // create a new map
+    map = new Map(80,43);
+    map->init(true);
+	gameStatus=STARTUP;    
 }

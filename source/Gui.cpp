@@ -13,6 +13,10 @@ Gui::Gui() {
 
 Gui::~Gui() {
 	delete con;
+	clear();
+}
+
+void Gui::clear() {
 	log.clearAndDelete();
 }
 
@@ -25,6 +29,14 @@ void Gui::render() {
 	renderBar(1,1,BAR_WIDTH,"HP",engine.player->destructible->hp,
 		engine.player->destructible->maxHp,
 		TCODColor::lightRed,TCODColor::darkerRed);
+
+	// draw the XP bar
+	PlayerAi *ai=(PlayerAi *)engine.player->ai;
+	char xpTxt[128];
+	sprintf(xpTxt,"XP(%d)",ai->xpLevel);
+	renderBar(1,5,BAR_WIDTH,xpTxt,engine.player->destructible->xp,
+		ai->getNextLevelXp(),
+		TCODColor::lightViolet,TCODColor::darkerViolet);
 
 	// draw the message log
 	int y=1;
@@ -41,6 +53,10 @@ void Gui::render() {
 
 	// mouse look
 	renderMouseLook();
+
+	// dungeon level
+	con->setDefaultForeground(TCODColor::white);
+	con->print(3,3,"Dungeon level %d",engine.level);
 
 	// blit the GUI console on the root console
 	TCODConsole::blit(con,0,0,engine.screenWidth,PANEL_HEIGHT,
@@ -129,4 +145,74 @@ void Gui::message(const TCODColor &col, const char *text, ...) {
 		// go to next line
 		lineBegin=lineEnd+1;
 	} while ( lineEnd );
+}
+
+
+Menu::~Menu() {
+	clear();
+}
+
+void Menu::clear() {
+	items.clearAndDelete();
+}
+
+void Menu::addItem(MenuItemCode code, const char *label) {
+	MenuItem *item=new MenuItem();
+	item->code=code;
+	item->label=label;
+	items.push(item);
+}
+
+const int PAUSE_MENU_WIDTH=30;
+const int PAUSE_MENU_HEIGHT=15;
+Menu::MenuItemCode Menu::pick(DisplayMode mode) {
+	int selectedItem=0;
+	int menux,menuy;
+	if (mode == PAUSE) {
+		menux=engine.screenWidth/2-PAUSE_MENU_WIDTH/2;
+		menuy=engine.screenHeight/2-PAUSE_MENU_HEIGHT/2;
+		TCODConsole::root->setDefaultForeground(TCODColor(200,180,50));
+		TCODConsole::root->printFrame(menux,menuy,PAUSE_MENU_WIDTH,PAUSE_MENU_HEIGHT,true,
+			TCOD_BKGND_ALPHA(70),"menu");		
+		menux+=2;
+		menuy+=3;
+	} else {
+		static TCODImage img("menu_background1.png");
+		img.blit2x(TCODConsole::root,0,0);
+		menux=10;
+		menuy=TCODConsole::root->getHeight()/3;
+	}
+
+	while( !TCODConsole::isWindowClosed() ) {
+		int currentItem=0;
+		for (MenuItem **it=items.begin(); it!=items.end(); it++) {
+			if ( currentItem == selectedItem ) {
+				TCODConsole::root->setDefaultForeground(TCODColor::lighterOrange);
+			} else {
+				TCODConsole::root->setDefaultForeground(TCODColor::lightGrey);
+			}
+			TCODConsole::root->print(menux,menuy+currentItem*3,(*it)->label);
+			currentItem++;
+		}
+		TCODConsole::flush();
+
+		// check key presses
+		TCOD_key_t key;
+		TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&key,NULL);
+		switch (key.vk) {
+			case TCODK_UP : 
+				selectedItem--; 
+				if (selectedItem < 0) {
+					selectedItem=items.size()-1;
+				}
+			break;
+			case TCODK_DOWN : 
+				selectedItem = (selectedItem + 1) % items.size(); 
+			break;
+			case TCODK_ENTER : 
+				return items.get(selectedItem)->code; 
+			default : break;
+		}
+	}
+	return NONE;
 }

@@ -1,49 +1,48 @@
-class TargetSelector {
+class Pickable : public Persistent {
 public :
-	enum SelectorType {
-		CLOSEST_MONSTER,
-		SELECTED_MONSTER,
-		WEARER_RANGE,
-		SELECTED_RANGE		
-	};
-	TargetSelector(SelectorType type, float range);
-	void selectTargets(Actor *wearer, TCODList<Actor *> & list);
-protected :
-	SelectorType type;
-	float range;
-};
-
-class Effect {
-public :
-	virtual bool applyTo(Actor *actor) = 0;
-};
-
-class HealthEffect : public Effect {
-public :
-	float amount;
-	const char *message;
-
-	HealthEffect(float amount, const char *message);
-	bool applyTo(Actor *actor);	
-};
-
-class AiChangeEffect : public Effect {
-public :
-	TemporaryAi *newAi;
-	const char *message;
-
-	AiChangeEffect(TemporaryAi *newAi, const char *message);
-	bool applyTo(Actor *actor);
-};
-
-class Pickable {
-public :
-	Pickable(TargetSelector *selector, Effect *effect);
-	virtual ~Pickable();
 	bool pick(Actor *owner, Actor *wearer);
 	void drop(Actor *owner, Actor *wearer);
-	bool use(Actor *owner, Actor *wearer);
+	virtual bool use(Actor *owner, Actor *wearer);
+	static Pickable *create (TCODZip &zip);
 protected :
-	TargetSelector *selector;
-	Effect *effect;
+	enum PickableType {
+		HEALER,LIGHTNING_BOLT,CONFUSER,FIREBALL
+	};
 };
+
+class Healer : public Pickable {
+public :
+	float amount; // how many hp
+
+	Healer(float amount);
+	bool use(Actor *owner, Actor *wearer);
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);	
+};
+
+class LightningBolt : public Pickable {
+public :
+	float range,damage;
+	LightningBolt(float range, float damage);
+	bool use(Actor *owner, Actor *wearer);
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);
+};
+
+class Confuser : public Pickable {
+public :
+	int nbTurns;
+	float range;
+	Confuser(int nbTurns, float range);
+	bool use(Actor *owner, Actor *wearer);	
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);
+};
+
+class Fireball : public LightningBolt {
+public :
+	Fireball(float range, float damage);
+	bool use(Actor *owner, Actor *wearer);	
+	void save(TCODZip &zip);	
+};
+

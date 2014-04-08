@@ -1,38 +1,44 @@
-class Ai {
+class Ai : public Persistent {
 public :
 	virtual void update(Actor *owner)=0;
-};
-
-class TemporaryAi : public Ai {
-public :
-	TemporaryAi(int nbTurns);
-	void update(Actor *owner);
-	void applyTo(Actor *actor);
+	static Ai *create (TCODZip &zip);
 protected :
-	int nbTurns;
-	Ai *oldAi;
+	enum AiType {
+		MONSTER,CONFUSED_MONSTER,PLAYER
+	};
 };
 
 class MonsterAi : public Ai {
 public :
 	MonsterAi();
 	void update(Actor *owner);
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);
 protected :
 	int moveCount;
 
 	void moveOrAttack(Actor *owner, int targetx, int targety);
 };
 
-class ConfusedMonsterAi : public TemporaryAi {
+class ConfusedMonsterAi : public Ai {
 public :
-	ConfusedMonsterAi(int nbTurns);
+	ConfusedMonsterAi(int nbTurns, Ai *oldAi);
 	void update(Actor *owner);
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);
+protected :
+	int nbTurns;
+	Ai *oldAi;
 };
 
 class PlayerAi : public Ai {
 public :
+	int xpLevel;
+	PlayerAi();
+	int getNextLevelXp();
 	void update(Actor *owner);
-
+	void load(TCODZip &zip);
+	void save(TCODZip &zip);
 protected :
 	bool moveOrAttack(Actor *owner, int targetx, int targety);
 	void handleActionKey(Actor *owner, int ascii);
