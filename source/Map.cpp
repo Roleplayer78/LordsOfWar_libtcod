@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include <math.h>
 
 static const int ROOM_MAX_SIZE = 12;
 static const int ROOM_MIN_SIZE = 6;
@@ -35,8 +36,8 @@ public :
     }
 };
 
-Map::Map(int width, int height) 
-	: width(width),height(height) {
+Map::Map(int width, int height)
+    : width(width),height(height),currentScentValue(SCENT_THRESHOLD) {
 	seed=TCODRandom::getInstance()->getInt(0,0x7FFFFFFF);
 }
 
@@ -92,6 +93,10 @@ void Map::addMonster(int x, int y) {
         troll->ai = new MonsterAi();
         engine.actors.push(troll);
     }
+}
+
+unsigned int Map::getScent(int x, int y) const {
+        return tiles[x+y*width].scent;
 }
 
 void Map::addItem(int x, int y) {
@@ -203,6 +208,20 @@ bool Map::isInFov(int x, int y) const {
 void Map::computeFov() {
     map->computeFov(engine.player->x,engine.player->y,
         engine.fovRadius);
+    for (int x=0; x < width; x++) {
+        for (int y=0; y < height; y++) {
+            if (isInFov(x,y)) {
+                unsigned int oldScent=getScent(x,y);
+                int dx=x-engine.player->x;
+                int dy=y-engine.player->y;
+                long distance=(int)sqrt(dx*dx+dy*dy);
+                unsigned int newScent=currentScentValue-distance;
+                if (newScent > oldScent) {
+                    tiles[x+y*width].scent = newScent;
+                }
+            }
+        }
+    }
 }
 
 void Map::render() const {
@@ -211,15 +230,21 @@ void Map::render() const {
 	static const TCODColor lightWall(130,110,50);
 	static const TCODColor lightGround(200,180,50);
 
-	for (int x=0; x < width; x++) {
-	    for (int y=0; y < height; y++) {
-	        if ( isInFov(x,y) ) {
-	            TCODConsole::root->setCharBackground(x,y,
-	                isWall(x,y) ? lightWall :lightGround );
-	        } else if ( isExplored(x,y) ) {
-	            TCODConsole::root->setCharBackground(x,y,
-	                isWall(x,y) ? darkWall : darkGround );
-	        }
-   	    }
-	}
+    for (int x=0; x < width; x++) {
+        for (int y=0; y < height; y++) {
+            int scent=SCENT_THRESHOLD - (currentScentValue - getScent(x,y));
+            scent = CLAMP(0,10,scent);
+            float sc=scent * 0.1f;
+            if ( isInFov(x,y) ) {
+                TCODConsole::root->setCharBackground(x,y,
+                    isWall(x,y) ? lightWall : TCODColor::lightGrey * sc );
+            } else if ( isExplored(x,y) ) {
+                TCODConsole::root->setCharBackground(x,y,
+                    isWall(x,y) ? darkWall : TCODColor::lightGrey * sc );
+            } else if (!isWall(x,y)) {
+                TCODConsole::root->setCharBackground(x,y,
+                     TCODColor::white * sc );
+            }
+        }
+    }
 }

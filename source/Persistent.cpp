@@ -132,12 +132,12 @@ void Attacker::save(TCODZip &zip) {
 }
 
 void MonsterAi::load(TCODZip &zip) {
-	moveCount=zip.getInt();
+	//moveCount=zip.getInt();
 }
 
 void MonsterAi::save(TCODZip &zip) {
 	zip.putInt(MONSTER);
-	zip.putInt(moveCount);
+	//zip.putInt(moveCount);
 }
 
 void ConfusedMonsterAi::load(TCODZip &zip) {

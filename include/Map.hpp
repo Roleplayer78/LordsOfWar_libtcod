@@ -1,5 +1,6 @@
 struct Tile {
     bool explored; // has the player already seen this tile ?
+    unsigned int scent; // amount of player scent on this cell
     Tile() : explored(false) {}
 };
  
@@ -15,6 +16,8 @@ public :
     bool canWalk(int x, int y) const;
     void computeFov();
     void render() const;
+    unsigned int currentScentValue;
+    unsigned int getScent(int x, int y) const;
 
 	void load(TCODZip &zip);
 	void save(TCODZip &zip);

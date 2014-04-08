@@ -47,6 +47,7 @@ void Engine::update() {
     }
     player->update();
     if ( gameStatus == NEW_TURN ) {
+        map->currentScentValue++;
 	    for (Actor **iterator=actors.begin(); iterator != actors.end();
 	        iterator++) {
 	        Actor *actor=*iterator;
