@@ -1,3 +1,8 @@
+
+// Engine maximum frame per second
+#define LIMIT_FPS  5  //25 frames-per-second maximum
+
+
 class Engine {
 public :
 	enum GameStatus {

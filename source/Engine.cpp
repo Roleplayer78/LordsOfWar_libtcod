@@ -4,7 +4,8 @@
 Engine::Engine(int screenWidth, int screenHeight) : gameStatus(STARTUP),
 	player(NULL),map(NULL),fovRadius(10),
 	screenWidth(screenWidth),screenHeight(screenHeight),level(1) {
-    TCODConsole::initRoot(screenWidth,screenHeight,"libtcod C++ tutorial",false);
+    TCODConsole::initRoot(screenWidth,screenHeight,"The Lords of War: Dark Ages",false);
+    TCODSystem::setFps(LIMIT_FPS); 
     gui = new Gui();
 }
 
@@ -46,16 +47,17 @@ void Engine::update() {
     	load(true);
     }
     player->update();
-    if ( gameStatus == NEW_TURN ) {
+    //if ( gameStatus == NEW_TURN ) {
         map->currentScentValue++;
 	    for (Actor **iterator=actors.begin(); iterator != actors.end();
 	        iterator++) {
 	        Actor *actor=*iterator;
 	        if ( actor != player ) {
+		    actor->updateAP(1.0); //increase AP
 	            actor->update();
 	        }
 	    }
-	}
+    //}
 }
 
 void Engine::render() {

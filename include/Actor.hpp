@@ -1,8 +1,11 @@
+#define MAX_AP_POOL 30 // Max Action points
+#define MIN_AP_POOL 0 // Min Action points
+
 class Actor : public Persistent {
 public :
-    int x,y; // position on map
-    int ch; // ascii code
-    TCODColor col; // color
+	int x,y; // position on map
+	int ch; // ascii code
+	TCODColor col; // color
 	const char *name; // the actor's name
 	bool blocks; // can we walk on this actor?
 	bool fovOnly; // only display when in fov
@@ -11,12 +14,14 @@ public :
 	Ai *ai; // something self-updating
 	Pickable *pickable; // something that can be picked and used
 	Container *container; // something that can contain actors
+	float _APPool; // Action pool for every action, only if actor has an Ai associated (can act)
 	 
 	Actor(int x, int y, int ch, const char *name, const TCODColor &col);
 	~Actor();
 	void update();
-    void render() const;
-    float getDistance(int cx, int cy) const;
+	void updateAP(float ap);
+	void render() const;
+	float getDistance(int cx, int cy) const;
 	void load(TCODZip &zip);
 	void save(TCODZip &zip);    
 };

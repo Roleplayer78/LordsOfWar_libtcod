@@ -25,6 +25,33 @@ void Actor::update() {
 	if ( ai ) ai->update(this);
 }
 
+/**
+ *	We use float since if Actor is slowed/hasted
+ *	it's possible to add fraction of AP
+ */
+void Actor::updateAP(float ap) {
+	if ( ai ) {
+		// Adding AP
+		if ( ap > 0 ) {
+			if ( (_APPool + ap) > MAX_AP_POOL ) {
+				// TODO if Actor is hasted somehow
+				_APPool = MAX_AP_POOL;
+			} else {
+				// TODO if Actor is hasted somehow
+				_APPool += ap;
+			}
+		} else { // Removing AP
+			if ( (_APPool - ap) < MIN_AP_POOL ) {
+				// TODO if Actor is slowed somehow
+				_APPool = MIN_AP_POOL;
+			} else {
+				// TODO if Actor is slowed somehow
+				_APPool -= ap;
+			}
+		}
+	}
+}
+
 float Actor::getDistance(int cx, int cy) const {
 	int dx=x-cx;
 	int dy=y-cy;

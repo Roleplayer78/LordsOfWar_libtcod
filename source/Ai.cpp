@@ -23,18 +23,24 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
     if ( distance < 2 ) {
         // at melee range. attack !
         if ( owner->attacker ) {
-            owner->attacker->attack(owner,engine.player);
+	    if ( owner->_APPool > AP_COST_MELEE_ATTACK ) {
+		owner->attacker->attack(owner,engine.player);
+		owner->updateAP(-AP_COST_MELEE_ATTACK);
+	    }
         }
         return;
     } else if (engine.map->isInFov(owner->x,owner->y)) {
-        // player in sight. go towards him !
-        dx = (int)(round(dx/distance));
-        dy = (int)(round(dy/distance));
-        if ( engine.map->canWalk(owner->x+dx,owner->y+dy) ) {
-                owner->x += dx;
-                owner->y += dy;
-                return;
-        }
+        if ( owner->_APPool > AP_COST_MOVE ) {
+		// player in sight. go towards him !
+		dx = (int)(round(dx/distance));
+		dy = (int)(round(dy/distance));
+		if ( engine.map->canWalk(owner->x+dx,owner->y+dy) ) {
+			owner->x += dx;
+			owner->y += dy;
+			return;
+		}
+		owner->updateAP(-AP_COST_MOVE);
+	}
     }
 
     // player not visible. use scent tracking.
@@ -55,10 +61,12 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
             }
         }
     }
-    if ( bestCellIndex != -1 ) {
+    if ( ( bestCellIndex != -1 ) &&
+	 ( owner->_APPool > AP_COST_MOVE ) ) {
         // the monster smells the player. follow the scent
         owner->x += tdx[bestCellIndex];
         owner->y += tdy[bestCellIndex];
+	owner->updateAP(-AP_COST_MOVE);
     }
 }
 

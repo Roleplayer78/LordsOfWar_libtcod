@@ -10,3 +10,4 @@ class Actor;
 #include "Map.hpp"
 #include "Gui.hpp"
 #include "Engine.hpp"
+#include "Actions.hpp"
