@@ -1,5 +1,3 @@
-#define MAX_AP_POOL 30 // Max Action points
-#define MIN_AP_POOL 0 // Min Action points
 
 class Actor : public Persistent {
 public :

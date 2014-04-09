@@ -23,9 +23,9 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
     if ( distance < 2 ) {
         // at melee range. attack !
         if ( owner->attacker ) {
-	    if ( owner->_APPool > AP_COST_MELEE_ATTACK ) {
+	    if ( owner->_APPool >= AP_COST_MELEE_ATTACK ) {
 		owner->attacker->attack(owner,engine.player);
-		owner->updateAP(-AP_COST_MELEE_ATTACK);
+		owner->updateAP(AP_COST_MELEE_ATTACK);
 	    }
         }
         return;
@@ -39,7 +39,7 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
 			owner->y += dy;
 			return;
 		}
-		owner->updateAP(-AP_COST_MOVE);
+		owner->updateAP(AP_COST_MOVE);
 	}
     }
 
@@ -62,7 +62,7 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
         }
     }
     if ( ( bestCellIndex != -1 ) &&
-	 ( owner->_APPool > AP_COST_MOVE ) ) {
+	 ( owner->_APPool >= AP_COST_MOVE ) ) {
         // the monster smells the player. follow the scent
         owner->x += tdx[bestCellIndex];
         owner->y += tdy[bestCellIndex];

@@ -39,8 +39,8 @@ void Engine::term() {
 }
 
 void Engine::update() {
-	if ( gameStatus == STARTUP ) map->computeFov();
-   	gameStatus=IDLE;
+    if ( gameStatus == STARTUP ) map->computeFov();
+    gameStatus=IDLE;
     TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS|TCOD_EVENT_MOUSE,&lastKey,&mouse);
     if ( lastKey.vk == TCODK_ESCAPE ) {
     	save();
@@ -53,7 +53,7 @@ void Engine::update() {
 	        iterator++) {
 	        Actor *actor=*iterator;
 	        if ( actor != player ) {
-		    actor->updateAP(1.0); //increase AP
+		    actor->updateAP(+1.0); //increase AP
 	            actor->update();
 	        }
 	    }
