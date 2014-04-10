@@ -53,7 +53,7 @@ void Engine::update() {
 	        iterator++) {
 	        Actor *actor=*iterator;
 	        if ( actor != player ) {
-		    actor->updateAP(+1.0); //increase AP
+		    actor->updateAP(1.0, ADD); //increase AP
 	            actor->update();
 	        }
 	    }

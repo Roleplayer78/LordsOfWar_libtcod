@@ -1,6 +1,4 @@
 
-// Engine maximum frame per second
-#define LIMIT_FPS  25  //25 frames-per-second maximum
 
 
 class Engine {

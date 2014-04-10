@@ -24,22 +24,22 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
         // at melee range. attack !
         if ( owner->attacker ) {
 	    if ( owner->_APPool >= AP_COST_MELEE_ATTACK ) {
+                owner->updateAP(AP_COST_MELEE_ATTACK, REMOVE);
 		owner->attacker->attack(owner,engine.player);
-		owner->updateAP(AP_COST_MELEE_ATTACK);
 	    }
         }
         return;
     } else if (engine.map->isInFov(owner->x,owner->y)) {
-        if ( owner->_APPool > AP_COST_MOVE ) {
+        if ( owner->_APPool >= AP_COST_MOVE ) {
 		// player in sight. go towards him !
 		dx = (int)(round(dx/distance));
 		dy = (int)(round(dy/distance));
 		if ( engine.map->canWalk(owner->x+dx,owner->y+dy) ) {
-			owner->x += dx;
-			owner->y += dy;
-			return;
+                    owner->updateAP(AP_COST_MOVE, REMOVE);
+                    owner->x += dx;
+                    owner->y += dy;
+                    return;
 		}
-		owner->updateAP(AP_COST_MOVE);
 	}
     }
 
@@ -54,7 +54,7 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
         int celly=owner->y+tdy[i];
         if (engine.map->canWalk(cellx,celly)) {
             unsigned int cellScent = engine.map->getScent(cellx,celly);     
-            if (cellScent > engine.map->currentScentValue - SCENT_THRESHOLD
+            if (cellScent >= engine.map->currentScentValue - SCENT_THRESHOLD
                 && cellScent > bestLevel) {
                 bestLevel=cellScent;
                 bestCellIndex=i;
@@ -64,9 +64,9 @@ void MonsterAi::moveOrAttack(Actor *owner, int targetx, int targety) {
     if ( ( bestCellIndex != -1 ) &&
 	 ( owner->_APPool >= AP_COST_MOVE ) ) {
         // the monster smells the player. follow the scent
+        owner->updateAP(AP_COST_MOVE, REMOVE);
         owner->x += tdx[bestCellIndex];
         owner->y += tdy[bestCellIndex];
-	owner->updateAP(-AP_COST_MOVE);
     }
 }
 

@@ -17,7 +17,7 @@ public :
 	Actor(int x, int y, int ch, const char *name, const TCODColor &col);
 	~Actor();
 	void update();
-	void updateAP(float ap);
+	void updateAP(float ap, bool add);
 	void render() const;
 	float getDistance(int cx, int cy) const;
 	void load(TCODZip &zip);

@@ -1,5 +1,3 @@
-// after 20 turns, the monster cannot smell the scent anymore
-static const int SCENT_THRESHOLD=20;
 
 class Ai : public Persistent {
 public :
