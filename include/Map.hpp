@@ -5,7 +5,7 @@ struct Tile {
     unsigned int scent; // amount of player scent on this cell
     bool destructible; // If Tile can be destroyed
     bool destroyed; // If Tile has been destroyed
-    unsigned short material; // Material of the tile
+    eMaterials material; // Material of the tile
     unsigned short ActualIntegrity; // How much integrity remains 
     
 
