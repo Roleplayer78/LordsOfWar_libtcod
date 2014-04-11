@@ -1,6 +1,7 @@
 #include <math.h>
-#include "main.hpp"
 #include <stdio.h>
+#include "main.hpp"
+
 
 Actor::Actor(int x, int y, int ch, const char *name,
         const TCODColor &col) :

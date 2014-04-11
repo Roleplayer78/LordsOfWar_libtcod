@@ -1,5 +1,8 @@
 #include "libtcod.hpp"
+#include "Actions.hpp"
+#include "Stats.hpp"
 class Actor;
+#include "Creature.hpp"
 #include "Persistent.hpp"
 #include "Destructible.hpp"
 #include "Attacker.hpp"
@@ -10,4 +13,3 @@ class Actor;
 #include "Map.hpp"
 #include "Gui.hpp"
 #include "Engine.hpp"
-#include "Actions.hpp"
