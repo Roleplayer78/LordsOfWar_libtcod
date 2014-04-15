@@ -9,3 +9,5 @@ project ( "The Lords of War" )
 
 # Adding sources to project
 add_subdirectory ( source )
+
+add_custom_target ( lua COMMAND make linux WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lua )
