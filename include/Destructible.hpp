@@ -1,4 +1,11 @@
 class Destructible : public Persistent {
+private:
+    tCharatteristics    _Char;
+    tCharatteristics    _CharImprove;
+    tSkills             _Skills;
+    tSkills             _SkillsImprove;
+    eBodyType           _BodyType;
+
 public :
 	float maxHp; // maximum health points
 	float hp; // current health points

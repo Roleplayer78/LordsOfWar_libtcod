@@ -64,7 +64,17 @@ typedef struct {
 
 } tSkills;
 
+/**
+ *  Body types
+ */
 
+typedef enum {
+    BODY_HUMANOID,
+    BODY_QUADRUPED,
+    BODY_SERPENTINE,
+    BODY_FISH,
+    BODY_UNKNOWN
+} eBodyType;
 /**
  *  Humanoid location charts
  */
