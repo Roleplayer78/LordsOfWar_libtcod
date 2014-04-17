@@ -12,7 +12,6 @@ public :
 	Ai *ai; // something self-updating
 	Pickable *pickable; // something that can be picked and used
 	Container *container; // something that can contain actors
-    Creature *creature; // All the stats that a creature will have
 	float _APPool; // Action pool for every action, only if actor has an Ai associated (can act)
 	 
 	Actor(int x, int y, int ch, const char *name, const TCODColor &col);
