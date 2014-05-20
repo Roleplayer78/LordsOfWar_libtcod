@@ -1,9 +1,15 @@
 #include "main.hpp"
 
+#define MAX_WOUNDS  50
+
+
+
 // Orc
-struct {
-    eBodyType Body = BODY_HUMANOID;
-    tCharatteristics Char = {
+tCreature Orc = {
+    // Body Type   //Body Size           //Wounds
+    BODY_HUMANOID, CREATURE_SIZE_NORMAL, NULL, 
+    //Stats
+    {
     10, // Strength
     10, // Dexterity
     10, // Agility
@@ -20,8 +26,9 @@ struct {
     10, // Morality
     10, // Religion
     10  // Aura
-    };
-    tSkills Skills = {
+    },
+    // Skills
+    {
     35, // Initiative
     35, // Unarmed
     35, // Dagger
@@ -38,33 +45,35 @@ struct {
     35, // Dodge
     35, // Shield
     35  // Physician
-    };
-    
-} sOrc;
+    }
+};
 
 
 // Troll
-struct {
-    eBodyType Body = BODY_HUMANOID;
-    tCharatteristics Char = {
-    15, // Strength
-    15, // Dexterity
-    15, // Agility
-    15, // Stamina
-    15, // Constitution
-    15, // Memory
-    15, // Willpower
-    15, // Smell
-    15, // Hearing
-    15, // Eyesight
-    15, // Intelligence
-    15, // Voice
-    15, // Appearance
-    15, // Morality
-    15, // Religion
-    15  // Aura
-    };
-    tSkills Skills = {
+tCreature Troll = {
+    // Body Type   //Body Size           //Wounds
+    BODY_HUMANOID, CREATURE_SIZE_LARGE, NULL, 
+    //Stats
+    {
+    10, // Strength
+    10, // Dexterity
+    10, // Agility
+    10, // Stamina
+    10, // Constitution
+    10, // Memory
+    10, // Willpower
+    10, // Smell
+    10, // Hearing
+    10, // Eyesight
+    10, // Intelligence
+    10, // Voice
+    10, // Appearance
+    10, // Morality
+    10, // Religion
+    10  // Aura
+    },
+    // Skills
+    {
     45, // Initiative
     45, // Unarmed
     45, // Dagger
@@ -81,6 +90,5 @@ struct {
     45, // Dodge
     45, // Shield
     45  // Physician
-    };
-    
-} sTroll;
+    }
+};
