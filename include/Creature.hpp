@@ -1,6 +1,7 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 
+//Creature definition
 typedef struct {
     eBodyType			Body;
     eCreatureSize		Size;

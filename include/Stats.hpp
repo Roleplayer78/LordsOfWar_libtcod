@@ -76,35 +76,34 @@ typedef enum {
     BODY_VOLATILE,
     BODY_UNKNOWN
 } eBodyType;
+
+typedef enum {
+    LOCATION_SIDE_DX,   // Front
+    LOCATION_SIDE_SX,   // Back
+    LOCATION_SIDE_UNKNOWN,
+} eLocationSide;
 /**
- *  Humanoid location charts
+ *  Generic location charts.
+ *  They could be mixed to create
+ *  different creature body mapping
  */
 typedef enum {
-    HUMANOID_HEAD               = 0x00000000,
-    HUMANOID_FACE               = 0x00000001,
-    HUMANOID_NECK               = 0x00000002,
-    HUMANOID_SHOULDER_SX        = 0x00000003,
-    HUMANOUD_SHOULDER_DX        = 0x00000004,
-    HUMANOID_BREAST             = 0x00000010,
-    HUMANOID_ARM_SX             = 0x00000020,
-    HUMANOID_ARM_DX             = 0x00000030,
-    HUMANOID_ELBOW_SX           = 0x00000040,
-    HUMANOUD_ELBOW_DX           = 0x00000100,
-    HUMANOID_FOREARM_SX         = 0x00000200,
-    HUMANOID_FOREARM_DX         = 0x00000300,
-    HUMANOID_HAND_SX            = 0x00000400,
-    HUMANOID_HAND_DX            = 0x00001000,
-    HUMANOID_ABDOMEN            = 0x00002000,
-    HUMANOID_WAIST              = 0x00003000,
-    HUMANOID_TIGHT_SX           = 0x00004000,
-    HUMANOID_TIGHT_DX           = 0x00010000,
-    HUMANOID_KNEE_SX            = 0x00020000,
-    HUMANOID_KNEE_DX            = 0x00030000,
-    HUMANOID_CALF_SX            = 0x00040000,
-    HUMANOID_CALF_DX            = 0x00100000,
-    HUMANOID_FEET_SX            = 0x00200000,
-    HUMANOID_FEET_DX            = 0x00300000,
-    HUMANOID_LOCATIONS          = 0xffffffff
+    HUMANOID_LOCATION_HEAD,
+    HUMANOID_LOCATION_FACE,
+    HUMANOID_LOCATION_NECK,
+    HUMANOID_LOCATION_SHOULDER,
+    HUMANOID_LOCATION_BREAST,
+    HUMANOID_LOCATION_ARM,
+    HUMANOID_LOCATION_ELBOW,
+    HUMANOID_LOCATION_FOREARM,
+    HUMANOID_LOCATION_HAND,
+    HUMANOID_LOCATION_ABDOMEN,
+    HUMANOID_LOCATION_WAIST,
+    HUMANOID_LOCATION_TIGHT,
+    HUMANOID_LOCATION_KNEE,
+    HUMANOID_LOCATION_CALF,
+    HUMANOID_LOCATION_FEET,
+    HUMANOID_LOCATION_UNKNOWN
 } eHumanoidLocation;
 
 typedef enum {
@@ -113,6 +112,7 @@ typedef enum {
     CREATURE_SIZE_NORMAL,
     CREATURE_SIZE_LARGE,
     CREATURE_SIZE_HUGE,
+    CREATURE_SIZE_UNKNOWN,
 } eCreatureSize;
 
 // typedef enum {
