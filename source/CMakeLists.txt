@@ -1,5 +1,5 @@
 
-set ( CMAKE_CPP_FLAGS "-Wall -pedantic" )
+set ( CMAKE_CPP_FLAGS "-Wall -Wextra -pedantic" )
 
 # Include directories
 include_directories ( ${CMAKE_SOURCE_DIR}/include ) 
@@ -11,6 +11,7 @@ file ( GLOB INCS ../include/*.hpp )
 find_library ( LIBTCODXX_LIBRARY NAMES "tcodxx" PATHS ${CMAKE_SOURCE_DIR}/libtcod NO_DEFAULT_PATH )
 find_library ( LIBTCOD_LIBRARY NAMES "tcod" PATHS ${CMAKE_SOURCE_DIR}/libtcod NO_DEFAULT_PATH )
 include_directories ( ${CMAKE_SOURCE_DIR}/libtcod/include ) 
+include_directories ( ${CMAKE_SOURCE_DIR}/sqlite ) 
 
 add_executable ( tlow ${SRCS} ${INCS} )
 target_link_libraries( tlow  ${LIBTCOD_LIBRARY} ${LIBTCODXX_LIBRARY} )

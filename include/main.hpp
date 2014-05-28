@@ -1,6 +1,7 @@
 #include "libtcod.hpp"
 #include "Actions.hpp"
 #include "Stats.hpp"
+#include "Equipment.hpp"
 class Actor;
 #include "Creature.hpp"
 #include "Persistent.hpp"

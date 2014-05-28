@@ -32,38 +32,6 @@ typedef struct {
     unsigned short Aura;
 } tCharatteristics;
 
-
-typedef struct {
-    // Combat skills
-    unsigned short Initiative; // TODO to check with realtime system how works
-    unsigned short Unarmed;
-    unsigned short Dagger; // All small blades up to and exluding short swords
-    unsigned short Sword; // All swords up to bastard swords
-    unsigned short Mace; // Axes and maces, excluding two handed
-    unsigned short Bow; // All bow, including composite but excluding long
-    unsigned short LongBow;
-    unsigned short Spear; // All spears and pikes
-    unsigned short PikeAxe; // All pikeaxes and halbeards
-    unsigned short TwoHanded; // All two handed swords, axes, maces
-    unsigned short Flail; // Flails, small and big
-    unsigned short Crossbow; // Crossbows, light, heavy, whatever
-    unsigned short Riding; // Riding horses, mules, ecc.
-    unsigned short Dodge; // Dodging armed and unarmed attacks
-    unsigned short Shield; // Using a shield proficently
-
-    // Social skills
-
-
-
-    // Academic skills
-    unsigned short Physician;
-    
-
-
-    // 
-
-} tSkills;
-
 /**
  *  Body types
  */
@@ -107,33 +75,14 @@ typedef enum {
 } eHumanoidLocation;
 
 typedef enum {
+    CREATURE_SIZE_NONE = 0,
     CREATURE_SIZE_TINY,
     CREATURE_SIZE_SMALL,
-    CREATURE_SIZE_NORMAL,
+    CREATURE_SIZE_AVERAGE,
     CREATURE_SIZE_LARGE,
     CREATURE_SIZE_HUGE,
     CREATURE_SIZE_UNKNOWN,
 } eCreatureSize;
-
-// typedef enum {
-//     WOUND_CUT_MINOR,
-//     WOUND_CUT_SERIOUS,
-//     WOUND_CUT_GRIEVUS,
-//     WOUND_CUT_KILLING,
-//     WOUND_BLUNT_MINOR,
-//     WOUND_BLUNT_SERIOUS,
-//     WOUND_BLUNT_GRIEVOUS,
-//     WOUND_BLUNT_KILLING,
-//     WOUND_POINT_MINOR,
-//     WOUND_POINT_SERIOUS,
-//     WOUND_POINT_GRIEVOUS,
-//     WOUND_POINT_KILLING,
-//     // Fire, cold, acid, ligthing, God fury, whatever
-//     WOUND_ENERGY_MINOR,
-//     WOUND_ENERGY_SERIOUS,
-//     WOUND_ENERGY_GRIEVOUS,
-//     WOUND_ENERGY_KILLING
-// } eWoundsType;
 
 typedef enum {
     WOUND_LEVEL_NONE,
@@ -144,17 +93,58 @@ typedef enum {
 } eWoundLevel;
 
 typedef enum {
+    HANDHANDNESS_RX,
+    HANDHANDNESS_SX,
+    HANDHANDNESS_BOTH,
+    HANDHANDNESS_UNKNOWN
+} eHandedness;
+
+typedef enum {
     WOUND_TYPE_CUT,
     WOUND_TYPE_PIERCE,
     WOUND_TYPE_BLUNT,
-    WOUND_TYPE_ENERGY
+    WOUND_TYPE_ENERGY // Fire, cold, acid, ligthing, God fury, whatever
 } eWoundType;
 
-typedef struct {
+typedef struct tsWound {
     eWoundLevel         Level;
     eHumanoidLocation   Location;
     eWoundType          Type;
+    char                HelingRate;
+    tsWound             *NextWound;
 } tWound;
+
+
+typedef struct {
+    // Combat skills
+    unsigned short Initiative; // TODO to check with realtime system how works
+    unsigned short Unarmed;
+    unsigned short Dagger; // All small blades up to and exluding short swords
+    unsigned short Sword; // All swords up to bastard swords
+    unsigned short Mace; // Axes and maces, excluding two handed
+    unsigned short Bow; // All bow, including composite but excluding long
+    unsigned short LongBow;
+    unsigned short Spear; // All spears and pikes
+    unsigned short PikeAxe; // All pikeaxes and halbeards
+    unsigned short TwoHanded; // All two handed swords, axes, maces
+    unsigned short Flail; // Flails, small and big
+    unsigned short Crossbow; // Crossbows, light, heavy, whatever
+    unsigned short Riding; // Riding horses, mules, ecc.
+    unsigned short Dodge; // Dodging armed and unarmed attacks
+    unsigned short Shield; // Using a shield proficently
+
+    // Social skills
+
+
+
+    // Academic skills
+    unsigned short Physician;
+    
+
+
+    // 
+
+} tSkills;
 
 
 

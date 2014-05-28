@@ -1,13 +1,14 @@
 #include "main.hpp"
 
-#define MAX_WOUNDS  50
-
-
 
 // Orc
 tCreature Orc = {
-    // Body Type   //Body Size           //Wounds
-    BODY_HUMANOID, CREATURE_SIZE_NORMAL, NULL, 
+    .Body           = BODY_HUMANOID,
+    .Size           = CREATURE_SIZE_AVERAGE,
+    .Wounds         = NULL,
+    .Handedness     = HANDHANDNESS_RX,
+    .NumOfArms      = 2,
+    
     //Stats
     {
     10, // Strength
@@ -51,8 +52,11 @@ tCreature Orc = {
 
 // Troll
 tCreature Troll = {
-    // Body Type   //Body Size           //Wounds
-    BODY_HUMANOID, CREATURE_SIZE_LARGE, NULL, 
+    .Body           = BODY_HUMANOID,
+    .Size           = CREATURE_SIZE_LARGE,
+    .Wounds         = NULL,
+    .Handedness     = HANDHANDNESS_RX,
+    .NumOfArms      = 2,
     //Stats
     {
     10, // Strength
