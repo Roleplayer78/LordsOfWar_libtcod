@@ -3,8 +3,9 @@
 #include <time.h>
 #include <string.h>
 #include <math.h>
-#include "Di
+#include "DiceRoller.hpp"
 
+#if 0
 #define MIN_PARAM 2
 
 typedef enum {
@@ -63,9 +64,10 @@ main( int argc, char *argv[] )
 
 	exit( 0 );
 }
+#endif
 
 int
-rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes)
+cDiceRoller::rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes)
 {
 	int i;
 	int diceRes = 0;
@@ -74,7 +76,7 @@ rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes)
 	for ( i = 0; i < dNum; i++ )
 	{
 		//setting seed
-		ock_gettime(CLOCK_MONOTONIC, &rTime);
+		clock_gettime(CLOCK_MONOTONIC, &rTime);
 		srand(rTime.tv_nsec);
 		diceRes += ( rand() % dType ) + 1;
 	}
@@ -92,7 +94,7 @@ rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes)
 }
 
 eOutcome
-skillCheck( int diceRes, int skillValue )
+cDiceRoller::skillCheck( int diceRes, int skillValue )
 {
 	eOutcome outcome = OUTCOME_UNKOWN;
 
@@ -125,7 +127,7 @@ skillCheck( int diceRes, int skillValue )
  *	outcome if
  */
 eOutcome
-genericCheck( int diceRes, int checkValue, bool crit )
+cDiceRoller::genericCheck( int diceRes, int checkValue, bool crit )
 {
 	eOutcome outcome = OUTCOME_UNKOWN;
 
