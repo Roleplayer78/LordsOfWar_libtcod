@@ -1,8 +1,10 @@
 #include "main.hpp"
 
-
-// Orc
-tCreature Orc = {
+// Structure Holding creatures
+tCreature Creatures [] =
+{
+{ // Orc
+#if 0
     .Body           = BODY_HUMANOID,
     .Size           = CREATURE_SIZE_AVERAGE,
     .Wounds         = NULL,
@@ -47,11 +49,10 @@ tCreature Orc = {
     35, // Shield
     35  // Physician
     }
-};
-
-
-// Troll
-tCreature Troll = {
+#endif  
+},
+{ // Troll
+#if 0
     .Body           = BODY_HUMANOID,
     .Size           = CREATURE_SIZE_LARGE,
     .Wounds         = NULL,
@@ -95,4 +96,6 @@ tCreature Troll = {
     45, // Shield
     45  // Physician
     }
-};
+#endif
+}
+}; // Creatures -- End of struct holding creatures

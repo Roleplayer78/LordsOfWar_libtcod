@@ -2,8 +2,10 @@
 #include "Actions.hpp"
 #include "Stats.hpp"
 #include "Equipment.hpp"
+#include "DiceRoller.hpp"
 class Actor;
 #include "Creature.hpp"
+#include "Combat.hpp"
 #include "Persistent.hpp"
 #include "Destructible.hpp"
 #include "Attacker.hpp"

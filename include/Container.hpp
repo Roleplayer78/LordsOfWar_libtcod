@@ -1,3 +1,8 @@
+#ifndef CONTAINER_HPP
+#define CONTAINER_HPP
+
+#include <vector>
+
 class Container : public Persistent {
 public :
 	int size; // maximum number of actors. 0=unlimited
@@ -10,3 +15,6 @@ public :
 	void load(TCODZip &zip);
 	void save(TCODZip &zip);
 };
+
+
+#endif // CONTAINER_HPP

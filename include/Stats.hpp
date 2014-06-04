@@ -1,5 +1,5 @@
-#ifndef STATS_H
-#define STATS_H
+#ifndef STATS_HPP
+#define STATS_HPP
 
 
 /***
@@ -56,23 +56,28 @@ typedef enum {
  *  different creature body mapping
  */
 typedef enum {
-    HUMANOID_LOCATION_HEAD,
-    HUMANOID_LOCATION_FACE,
-    HUMANOID_LOCATION_NECK,
-    HUMANOID_LOCATION_SHOULDER,
-    HUMANOID_LOCATION_BREAST,
-    HUMANOID_LOCATION_ARM,
-    HUMANOID_LOCATION_ELBOW,
-    HUMANOID_LOCATION_FOREARM,
-    HUMANOID_LOCATION_HAND,
-    HUMANOID_LOCATION_ABDOMEN,
-    HUMANOID_LOCATION_WAIST,
-    HUMANOID_LOCATION_TIGHT,
-    HUMANOID_LOCATION_KNEE,
-    HUMANOID_LOCATION_CALF,
-    HUMANOID_LOCATION_FEET,
-    HUMANOID_LOCATION_UNKNOWN
-} eHumanoidLocation;
+    LOCATION_RAIDERLEGS,
+    LOCATION_HEAD,
+    LOCATION_FACE,
+    LOCATION_NECK,
+    LOCATION_SHOULDER,
+    LOCATION_UPPERARM,
+    LOCATION_ELBOW,
+    LOCATION_FOREARM,
+    LOCATION_HAND,
+    LOCATION_WING,
+    LOCATION_THORAX,
+    LOCATION_ABDOMEN,
+    LOCATION_HIP,
+    LOCATION_GROIN,
+    LOCATION_TAIL,
+    LOCATION_THIGH,
+    LOCATION_KNEE,
+    LOCATION_CALF,
+    LOCATION_FEET,
+    LOCATION_STEED, // Special location for mounted characters
+    LOCATION_UNKNOWN
+} eLocation;
 
 typedef enum {
     CREATURE_SIZE_NONE = 0,
@@ -108,7 +113,7 @@ typedef enum {
 
 typedef struct tsWound {
     eWoundLevel         Level;
-    eHumanoidLocation   Location;
+    eLocation   Location;
     eWoundType          Type;
     char                HelingRate;
     tsWound             *NextWound;
@@ -148,5 +153,5 @@ typedef struct {
 
 
 
-#endif // STATS_H
+#endif // STATS_HPP
 

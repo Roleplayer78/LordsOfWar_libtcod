@@ -1,5 +1,5 @@
-#ifndef EQUIPMENT_H
-#define EQUIPMENT_H
+#ifndef EQUIPMENT_HPP
+#define EQUIPMENT_HPP
 
 #include <math.h>
 /**
@@ -75,4 +75,4 @@ typedef struct {
 } tItem;
 
 
-#endif // EQUIPMENT_H
+#endif // EQUIPMENT_HPP
