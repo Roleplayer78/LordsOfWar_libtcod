@@ -12,6 +12,20 @@ typedef struct {
     tSkills				Skills;
 } tCreature;
 
+class cCreature {
+    public:
+        cCreature(){};
+//        std::vector<tCreature> Creatures( 100 );
+
+        ~cCreature(){};
+
+
+    private:
+
+
+};
+
+
 extern tCreature	Orc;
 extern tCreature	Troll;
 

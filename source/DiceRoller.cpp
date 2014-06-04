@@ -3,9 +3,13 @@
 #include <time.h>
 #include <string.h>
 #include <math.h>
+
+#ifndef TEST
+
 #include "DiceRoller.hpp"
 
-#if 0
+#elif defined TEST
+
 #define MIN_PARAM 2
 
 typedef enum {
@@ -17,13 +21,21 @@ typedef enum {
 } eOutcome;
 
 
-int rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes);
-eOutcome skillCheck( int diceRes, int skillValue );
-eOutcome genericCheck( int diceRes, int checkValue, bool crit );
+class cDiceRoller {
+
+public:
+    cDiceRoller (){};
+    ~cDiceRoller (){};
+
+    int rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes = +1, int baseValue = +1);
+    eOutcome skillCheck( int diceRes, int skillValue );
+    eOutcome genericCheck( int diceRes, int checkValue, bool crit );
+};
 
 int
 main( int argc, char *argv[] )
 {
+    cDiceRoller Dice;
 	int i = 0;
 	unsigned int dType = 0;
 	unsigned int dNum = 0;
@@ -56,18 +68,19 @@ main( int argc, char *argv[] )
 		}
 	}
 
-	skill = rollDice( 100, 1, 0, 1);
-	dice  = rollDice( dType, dNum, dMod, 1);
-	printf("Skill %d, roll %d : outcome %d \n", skill, dice, skillCheck( dice, skill) );
-	dice  = rollDice( 6, 4, dMod, 1);
-	printf("genericCheck %d, roll %d : outcome %d \n", 15, dice, genericCheck( dice, skill, true) );
+	skill = Dice.rollDice( 100, 1, 0, 1, 1);
+	dice  = Dice.rollDice( dType, dNum, dMod, 1, 1);
+	printf("Skill %d, roll %d : outcome %d \n", skill, dice, Dice.skillCheck( dice, skill) );
+	dice  = Dice.rollDice( 6, 4, dMod, 1, 1);
+	printf("genericCheck %d, roll %d : outcome %d \n", 15, dice, Dice.genericCheck( dice, skill, true) );
+	printf("Handedness %#X\n", Dice.rollDice( 3, 1, 0, 0, 0 ) );
 
 	exit( 0 );
 }
 #endif
 
 int
-cDiceRoller::rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes)
+cDiceRoller::rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes, int baseValue)
 {
 	int i;
 	int diceRes = 0;
@@ -78,7 +91,7 @@ cDiceRoller::rollDice( unsigned int dType, unsigned int dNum, int dMod, int minR
 		//setting seed
 		clock_gettime(CLOCK_MONOTONIC, &rTime);
 		srand(rTime.tv_nsec);
-		diceRes += ( rand() % dType ) + 1;
+		diceRes += ( rand() % dType ) + baseValue;
 	}
 
 	diceRes += dMod;

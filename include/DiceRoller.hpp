@@ -16,7 +16,7 @@ class cDiceRoller {
         cDiceRoller  ( void );
         ~cDiceRoller  ( void );
 
-        int rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes);
+        int rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes = +1, int baseValue = +1);
         eOutcome skillCheck( int diceRes, int skillValue );
         eOutcome genericCheck( int diceRes, int checkValue, bool crit );
 
