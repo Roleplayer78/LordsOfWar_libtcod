@@ -90,26 +90,12 @@ typedef enum {
 } eCreatureSize;
 
 typedef enum {
-    WOUND_LEVEL_NONE,
-    WOUND_LEVEL_GRAZE,
-    WOUND_LEVEL_SEVERE,
-    WOUND_LEVEL_GRIEVOUS,
-    WOUND_LEVEL_KILLING
-} eWoundLevel;
-
-typedef enum {
     HANDHANDNESS_RX,
     HANDHANDNESS_SX,
     HANDHANDNESS_BOTH,
     HANDHANDNESS_UNKNOWN
 } eHandedness;
 
-typedef enum {
-    WOUND_TYPE_CUT,
-    WOUND_TYPE_PIERCE,
-    WOUND_TYPE_BLUNT,
-    WOUND_TYPE_ENERGY // Fire, cold, acid, ligthing, God fury, whatever
-} eWoundType;
 
 typedef struct tsWound {
     eWoundLevel         Level;
@@ -117,7 +103,7 @@ typedef struct tsWound {
     eWoundType          Type;
     char                HelingRate;
     tsWound             *NextWound;
-} tWound;
+} tSustainedWound;
 
 
 typedef struct {

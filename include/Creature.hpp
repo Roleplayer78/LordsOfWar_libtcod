@@ -1,5 +1,5 @@
-#ifndef CREATURE_HPP
-#define CREATURE_HPP
+#ifndef CREATURE_H
+#define CREATURE_H
 
 /******************************************************************************
  ** Locations Tables
@@ -19,7 +19,6 @@ typedef struct {
 
 /*****************************************************************************/
 
-
 //Creature definition
 typedef struct {
 	typedef struct {
@@ -29,7 +28,7 @@ typedef struct {
     	eCreatureSize		Size;
 	    eHandedness			Handedness;
     } tAnatomy;
-    tWound 				*Wounds;
+    TCOD_list_t         Wounds;
     eHandedness			Handedness;
     unsigned short		NumOfArms;
     tCharatteristics	Char;
@@ -49,11 +48,6 @@ class cCreature {
 
 };
 
-// Hit tables
-extern tLocation HumanStrikeTable[];
-extern tLocation QuadrupedStrikeTable[];
-extern tLocation AvianStrikeTable[];
-extern tLocation SerpentineStrikeTable[]; 
 
 // Creature definitions
 // All creatures are part of this array, stored in a vector
