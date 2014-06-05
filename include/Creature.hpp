@@ -5,7 +5,7 @@
 typedef struct {
     eBodyType			Body;
     eCreatureSize		Size;
-    tWound 				*Wounds;
+    TCOD_list_t         Wounds;
     eHandedness			Handedness;
     unsigned short		NumOfArms;
     tCharatteristics	Char;

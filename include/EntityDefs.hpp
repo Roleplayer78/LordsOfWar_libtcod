@@ -25,23 +25,6 @@ typedef enum beingStatus {
     STATUS_FATIGUED          = 0x00001000       //The being has one or more fatigue levels. It's just a marker
 };
 
-typedef enum woundsLevel {
-    WOUND_NONE               = 0,
-    WOUND_LIGHT,
-    WOUND_MEDIUM,
-    WOUND_GRIEVOUS,
-    WOUND_KILLING
-};
-
-typedef enum woundsType {
-    WOUND_EDGE              = 0,    //Cutting wounds like knives, blades, saws, ecc.
-    WOUND_BLUNT,                    //Falling, clubs, punches, rocks, ecc.
-    WOUND_PIERCING,                 //Spears, arrows, swords thrusts, ecc-
-    WOUND_FIRE,                     //Fire...
-    WOUND_COLD,                     //Intense cold
-    WOUND_CORROSIVE                 //Acid or else
-};
-
 typedef enum statsName {
     STAT_STRENGTH = 0,              //Your body strength
     STAT_AGILITY,                   //Your body agility and general prowess

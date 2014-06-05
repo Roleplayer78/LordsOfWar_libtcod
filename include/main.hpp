@@ -1,5 +1,6 @@
 #include "libtcod.hpp"
 #include "Actions.hpp"
+#include "Wounds.hpp"
 #include "Stats.hpp"
 #include "Equipment.hpp"
 class Actor;
