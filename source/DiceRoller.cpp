@@ -4,10 +4,9 @@
 #include <string.h>
 #include <math.h>
 
+
 #ifndef TEST
-
 #include "DiceRoller.hpp"
-
 #elif defined TEST
 
 #define MIN_PARAM 2
@@ -169,5 +168,4 @@ cDiceRoller::genericCheck( int diceRes, int checkValue, bool crit )
 
 	return(outcome);
 }
-
 

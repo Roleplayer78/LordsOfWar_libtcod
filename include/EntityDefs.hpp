@@ -25,20 +25,6 @@ typedef enum beingStatus {
     STATUS_FATIGUED          = 0x00001000       //The being has one or more fatigue levels. It's just a marker
 };
 
-typedef enum statsName {
-    STAT_STRENGTH = 0,              //Your body strength
-    STAT_AGILITY,                   //Your body agility and general prowess
-    STAT_DEXTERITY,                 //You hand/eye coordination and hand quickness
-    STAT_CONSTITUTION,              //Your physical build and resistance (disease, cold, privations)
-    STAT_ENDURANCE,                 //How difficulty you tyre
-    STAT_COMMELINESS,               //You physical aspect
-    STAT_INTELLIGENCE,              //Your reasoning and understanding
-    STAT_MEMORY,                    //How much can you retain infos
-    STAT_WILLPOWER,                 //Mental endurance and perseverance
-    STAT_EYESIGHT,                  //Your eyesight
-    STAT_HEARING,                   //Your earing
-    STAT_VOICE,                     //Your voice (quality and strength)
-    STAT_PIETY                     //How religiuous you are
-}
+
 
 #endif //DEFINITIONS_H

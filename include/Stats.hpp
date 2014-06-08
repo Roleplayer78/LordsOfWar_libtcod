@@ -1,6 +1,22 @@
 #ifndef STATS_HPP
 #define STATS_HPP
 
+typedef enum {
+    STAT_STRENGTH = 0,              // Your body strength
+    STAT_AGILITY,                   // Your body agility and general prowess
+    STAT_DEXTERITY,                 // You hand/eye coordination and hand quickness
+    STAT_CONSTITUTION,              // Your physical build and resistance (disease, cold, privations)
+    STAT_ENDURANCE,                 // How difficulty you tyre
+    STAT_COMMELINESS,               // You physical aspect
+    STAT_INTELLIGENCE,              // Your reasoning and understanding
+    STAT_MEMORY,                    // How much can you retain infos
+    STAT_WILLPOWER,                 //  Mental endurance and perseverance
+    STAT_EYESIGHT,                  // Your eyesight
+    STAT_HEARING,                   // Your earing
+    STAT_VOICE,                     // Your voice (quality and strength)
+    STAT_PIETY,                     // How religiuous you are
+    STAT_UNKNOWN
+} eCharacteristics;
 
 /***
  * Basic physical/mental stats
@@ -109,7 +125,7 @@ typedef struct tsWound {
 typedef struct {
     // Combat skills
     unsigned short Initiative; // TODO to check with realtime system how works
-    unsigned short Unarmed;
+    unsigned short Unarmed; // Fighting with hand/feets ... make your body count!
     unsigned short Dagger; // All small blades up to and exluding short swords
     unsigned short Sword; // All swords up to bastard swords
     unsigned short Mace; // Axes and maces, excluding two handed

@@ -21,13 +21,15 @@ typedef struct {
 
 //Creature definition
 typedef struct {
-	typedef struct {
-    	eBodyType			Body;
+	typedef struct tBody{
+    	eBodyType			Body;  // Type of body
     	bool				Tailed;
     	bool				Winged;
-    	eCreatureSize		Size;
+    	eCreatureSize		Size;   // Size, not necessarily related to Weight/Height
 	    eHandedness			Handedness;
-    } tAnatomy;
+        unsigned short      Weight; // Lbs
+        unsigned short      Height; // Inches
+    } Body;
     TCOD_list_t         Wounds;
     eHandedness			Handedness;
     unsigned short		NumOfArms;
