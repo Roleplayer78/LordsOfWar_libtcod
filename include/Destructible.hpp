@@ -1,3 +1,6 @@
+#ifndef DESTRUCTABLE_HPP
+#define DESTRUCTABLE_HPP
+
 class Destructible : public Persistent {
 private:
     tCharatteristics    _Char;
@@ -40,3 +43,5 @@ public :
 	void die(Actor *owner);
 	void save(TCODZip &zip);	
 };
+
+#endif // DESTRUCTABLE_HPP

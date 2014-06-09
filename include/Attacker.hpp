@@ -1,4 +1,7 @@
-class Attacker : public Persistent {
+#ifndef ATTACKER_HPP
+#define ATTACKER_HPP
+
+class Attacker : public Persistent, cDiceRoller {
 public :
 	float power; // hit points given
 
@@ -7,3 +10,6 @@ public :
 	void load(TCODZip &zip);
 	void save(TCODZip &zip);
 };
+
+
+#endif // ATTACKER_HPP

@@ -1,3 +1,6 @@
+#ifndef GUI_HPP
+#define GUI_HPP
+
 class Menu {
 public :
 	enum MenuItemCode {
@@ -51,3 +54,5 @@ protected :
 		const TCODColor &backColor);
 	void renderMouseLook();
 };
+
+#endif // GUI_HPP

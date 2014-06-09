@@ -1,3 +1,6 @@
+#ifndef MAIN_HPP
+#define MAIN_HPP
+
 #include "libtcod.hpp"
 #include "Actions.hpp"
 #include "Wounds.hpp"
@@ -17,3 +20,5 @@ class Actor;
 #include "Map.hpp"
 #include "Gui.hpp"
 #include "Engine.hpp"
+
+#endif // MAIN_HPP

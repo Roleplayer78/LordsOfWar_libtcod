@@ -13,8 +13,8 @@ typedef enum {
 class cDiceRoller {
 
     public:
-        cDiceRoller  ( void ) {};
-        ~cDiceRoller  ( void ) {};
+        cDiceRoller  ( ) {};
+        ~cDiceRoller  ( ) {};
 
         int rollDice( unsigned int dType, unsigned int dNum, int dMod, int minRes = +1, int baseValue = +1);
         eOutcome skillCheck( int diceRes, int skillValue );

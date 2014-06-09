@@ -1,3 +1,6 @@
+#ifndef MAP_HPP
+#define MAP_HPP
+
 #include "Materials.hpp"
 
 struct Tile {
@@ -43,3 +46,5 @@ protected:
     void addMonster(int x, int y);
     void addItem(int x, int y);
 };
+
+#endif // MAP_HPP

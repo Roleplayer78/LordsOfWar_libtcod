@@ -1,5 +1,8 @@
+#ifndef AI_HPP
+#define AI_HPP
 
-class Ai : public Persistent {
+
+class Ai : public Persistent, cDiceRoller {
 public :
 	virtual void update(Actor *owner)=0;
 	static Ai *create (TCODZip &zip);
@@ -45,3 +48,5 @@ protected :
 	void handleActionKey(Actor *owner, int ascii);
 	Actor *choseFromInventory(Actor *owner);
 };
+
+#endif // AI_HPP

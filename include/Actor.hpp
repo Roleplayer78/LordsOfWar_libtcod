@@ -1,5 +1,7 @@
+#ifndef ACTOR_HPP
+#define ACTOR_HPP
 
-class Actor : public Persistent {
+class Actor : public Persistent, cDiceRoller {
 public :
 	int x,y;					// position on map
 	int ch; 					// ascii code
@@ -31,3 +33,6 @@ public :
 	void load(TCODZip &zip);
 	void save(TCODZip &zip);    
 };
+
+
+#endif // ACTOR_HPP
