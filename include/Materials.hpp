@@ -13,7 +13,7 @@ typedef enum {
     SCALE_REGION    = 0x0040,
     SCALE_WORLD     = 0x0400,
 
-    SCALE_MAX       = 0xffff    // Nothing can be this scale
+    SCALE_UNKNOWN       = 0xffff    // Nothing can be this scale
 } eScale;
 
 
@@ -61,7 +61,7 @@ typedef enum {
 
 
 
-    MATERIAL_UNDEFINED
+    MATERIAL_UNKNOWN
 } eMaterials;
 
 typedef struct {
